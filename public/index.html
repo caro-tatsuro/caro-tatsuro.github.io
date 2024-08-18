@@ -10,7 +10,6 @@
 
     <link rel="stylesheet" href="tailwind.css">
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <meta name="google-site-verification" content="u5L_Y0F5SrIw0169D8_spWhzt_rdKUzGtemugTiCZGw" />
     <meta name="description" content="Catur Hendra Putra Pamungkas Ceo Of Carotech">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -40,7 +39,7 @@
 
 </head>
 
-<body class=" bg-gradient-to-r from-secondary to-third md:overflow-x-hidden">
+<body class=" bg-gradient-to-r from-secondary to-third md:overflow-x-hidden cursor-none">
     <div id="loading" class="fixed z-50 inset-0 overflow-hidden animated">
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
             <!-- Background overlay -->
@@ -945,8 +944,9 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <!-- swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper(".mySwiper", {
             effect: "cards",
@@ -974,6 +974,8 @@
         });
     </script>
 
+
+    <!-- scroll event -->
     <script>
         window.onscroll = function () {
             const header = document.querySelector('header');
@@ -1021,6 +1023,8 @@
         });
     </script>
 
+
+    <!-- opening animate text -->
     <script>
         var typed_loading = new Typed('#loading_text', {
             strings: ["Welcome to the Carroo's world"],
@@ -1041,6 +1045,8 @@
         });
     </script>
 
+
+    <!-- resume menu -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const buttons = document.querySelectorAll('#btns-resume > button');
@@ -1061,6 +1067,8 @@
 
     </script>
 
+
+    <!-- effect click -->
     <script>
         let currentTextIndex = 0;
         const texts = ["😀", "🥰", "😜", "🤭"];
@@ -1069,14 +1077,13 @@
             // Membuat elemen teks efek klik
             const clickEffect = document.createElement("div");
             clickEffect.classList.add('click-effect');
-            clickEffect.classList.add('absolute');
             clickEffect.textContent = texts[currentTextIndex];
 
             // Mengatur posisi efek klik sesuai dengan posisi klik
             const x = event.clientX + window.pageXOffset;
             const y = event.clientY + window.pageYOffset;
-            clickEffect.style.left = `${x - 15}px`;
-            clickEffect.style.top = `${y - 15}px`;
+            clickEffect.style.left = `${x - 28}px`;
+            clickEffect.style.top = `${y - 28}px`;
 
             // Menambahkan elemen efek klik ke dalam elemen body
             document.body.appendChild(clickEffect);
@@ -1223,6 +1230,47 @@
     </script>
 
 
+    <!-- cursor trail-->
+    <script>
+        const dots = [];
+        const cursor = {
+            y: 0,
+            x: 0,
+            initialY: 0,
+        };
+        for (let i = 0; i < 30; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot-cursor');
+            document.body.appendChild(dot);
+            dots.push(dot);
+        }
+        window.addEventListener('mousemove', (e) => {
+            cursor.x = e.clientX + window.scrollX;
+            cursor.y = e.clientY + window.scrollY;
+            cursor.initialY = e.clientY;
+        });
+        window.addEventListener('scroll', (e) => {
+            
+            cursor.y = window.scrollY + cursor.initialY;
+        });
+        function dotsTrail() {
+            let x = cursor.x;
+            let y = cursor.y;
+            dots.forEach((dot, i) => {
+                const nextDot = dots[i + 1] || dots[0];
+                dot.style.left = (x - 12) + 'px';
+                dot.style.top = (y - 12) + 'px';
+
+                //dot.style.transform = `scale(${1 - i * 0.1})`;
+                dot.style.scale = (dots.length - i) / dots.length;
+
+                x += (nextDot.offsetLeft - dot.offsetLeft) * 0.25;
+                y += (nextDot.offsetTop - dot.offsetTop) * 0.25;
+            });
+            requestAnimationFrame(dotsTrail);
+        }
+        dotsTrail();
+    </script>
 </body>
 
 </html>
